@@ -24,7 +24,6 @@ class TagController extends Controller
     {
         $tags = $this->tagRepository->all();
         return response()->json([
-            'success' => true,
             'data' => $tags
         ]);
     }
@@ -33,7 +32,6 @@ class TagController extends Controller
     {
         $tag = $this->tagRepository->create($request->all());
         return response()->json([
-            'success' => true,
             'data' => $tag
         ]);
     }
@@ -45,18 +43,16 @@ class TagController extends Controller
 
     public function update(UpdateTagRequest $request, Tags $tag): JsonResponse
     {
-        $result = $this->tagRepository->update($tag, $request->all());
+        $this->tagRepository->update($tag, $request->all());
         return response()->json([
-            'success' => $result,
             'data' => $tag
         ]);
     }
 
     public function destroy(Tags $tag): JsonResponse
     {
-        $result = $this->tagRepository->delete($tag);
+        $this->tagRepository->delete($tag);
         return response()->json([
-            'success' => $result,
             'data' => $tag
         ]);
     }

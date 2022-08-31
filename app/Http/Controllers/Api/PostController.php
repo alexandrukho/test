@@ -28,7 +28,6 @@ class PostController extends Controller
         $posts = $this->postRepository->all();
 
         return response()->json([
-            'success' => true,
             'data' => $posts
         ]);
     }
@@ -38,7 +37,6 @@ class PostController extends Controller
         $post = $this->postRepository->create($request->all());
 
         return response()->json([
-            "success" => true,
             "data" => $post
         ]);
     }
@@ -48,7 +46,6 @@ class PostController extends Controller
         $post = $this->postRepository->find($post);
 
         return response()->json([
-            "success" => true,
             "data" => $post
         ]);
 
@@ -56,10 +53,9 @@ class PostController extends Controller
 
     public function update(UpdatePostRequest $request, Post $post): JsonResponse
     {
-        $result = $this->postRepository->update($post, $request->all());
+        $this->postRepository->update($post, $request->all());
 
         return response()->json([
-            "success" => $result,
             "data" => $post
         ]);
     }
@@ -72,11 +68,9 @@ class PostController extends Controller
      */
     public function destroy(DeletePostRequest $request, Post $post): JsonResponse
     {
-        $result = $this->postRepository->delete($post, $request->language_id);
+        $this->postRepository->delete($post, $request->language_id);
 
         return response()->json([
-            "success" => $result,
-            "message" => "post deleted successfully.",
             "data" => $post
         ]);
     }
